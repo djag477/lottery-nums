@@ -3,38 +3,24 @@ const button = document.getElementById('btn');
 const listOfLuckies = document.getElementById("luckies")
 
 button.addEventListener('click', (e) => {
-
     e.preventDefault();
     /* console.log(inputBox.value)
     console.log("clicked"); */
-
     listOfLuckies.innerHTML = "";
-    
+    let amount = inputBox.value;
+     
+    for (let i = 0; i < amount; i++) {
+        let numArray = Array(6).fill(null).map((_, i) => Math.floor((Math.random() * 90) + 1));
+        //Here we have created a numArray with 6 null-valued elements. Then we have changed all elements to random num in a new array, by using map. The new array is our numArray.
 
-
-    for (let i = 0; i < inputBox.value; i++) {
+        numArray.sort(function(a, b){return a-b});  
+        let num = numArray.join("-");
         
-
-
-        const numArray = [Math.floor(Math.random() * 90), Math.floor(Math.random() * 90), Math.floor(Math.random() * 90), Math.floor(Math.random() * 90), Math.floor(Math.random() * 90), Math.floor(Math.random() * 90)];
-
-
-        numArray.sort(function(a, b){return a-b});
-
-        
-        let num = numArray.join("-")
-
-        let joker = null
-
+        let joker = null;
         while (joker in numArray || joker == null) {
-            
-            joker = Math.floor(Math.random() * 90)
-
+            joker = Math.floor((Math.random() * 90) + 1)
         }
-
-
-        num += ` | ${joker} | ${Math.floor(Math.random() * 90)}`
-
+        num += ` | ${joker} | ${Math.floor((Math.random() * 90) + 1)}`
 
         let li = document.createElement('li');
         li.appendChild(document.createTextNode(num));
@@ -44,4 +30,4 @@ button.addEventListener('click', (e) => {
 
     inputBox.value = "";
 
-})
+});
